@@ -1,7 +1,10 @@
 require("dotenv").config();
+const path = require("path");
 const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 module.exports = {
+  contracts_build_directory: path.join(__dirname, "client/src/contracts"),
+
   networks: {
     development: {
       host: "127.0.0.1",
@@ -28,7 +31,11 @@ module.exports = {
 
   compilers: {
     solc: {
-      version: "0.8.0",
+      optimizer: {
+        enable: true,
+        runs: 200,
+      },
+      version: "^0.8.0",
     },
   },
 };
