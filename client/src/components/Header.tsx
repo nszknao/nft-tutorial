@@ -1,4 +1,5 @@
-import type { Web3Provider } from "@ethersproject/providers";
+import { Box, Flex, Heading } from "@chakra-ui/layout";
+import { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import React, { VFC } from "react";
@@ -15,7 +16,7 @@ const injectedConnector = new InjectedConnector({
   ],
 });
 
-export const Wallet: VFC = () => {
+export const Header: VFC = () => {
   const { account, activate, active } = useWeb3React<Web3Provider>();
 
   const connect = async () => {
@@ -23,9 +24,21 @@ export const Wallet: VFC = () => {
   };
 
   return (
-    <div>
-      {account}
-      {!active && <button onClick={connect}>Connect Wallet</button>}
-    </div>
+    <Flex
+      as="nav"
+      align="center"
+      justify="space-between"
+      padding={4}
+      bg="teal.500"
+      color="white"
+    >
+      <Heading as="h1" size="md" letterSpacing="tighter">
+        Color Tokens
+      </Heading>
+      <Box>
+        {account}
+        {!active && <button onClick={connect}>Connect Wallet</button>}
+      </Box>
+    </Flex>
   );
 };
