@@ -1,7 +1,7 @@
 import { EtherscanProvider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
 import React, { useEffect, VFC } from "react";
-import { Header } from "./components/header";
+import { Header } from "src/components/Header";
 
 export const EtherscanPage: VFC = () => {
   const { account, library } = useWeb3React<EtherscanProvider>();

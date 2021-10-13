@@ -7,8 +7,8 @@ import {
   Input,
 } from "@chakra-ui/react";
 import React, { VFC } from "react";
-import { Header } from "./components/Header";
-import { MintedColors } from "./components/MintedColors";
+import { Header } from "src/components/Header";
+import { MintedColors } from "src/components/MintedColors";
 
 export const IndexPage: VFC = () => {
   return (
