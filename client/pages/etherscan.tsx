@@ -1,10 +1,10 @@
-import { EtherscanProvider } from "@ethersproject/providers";
+import { Web3Provider } from "@ethersproject/providers";
 import { Web3ReactProvider } from "@web3-react/core";
 import type { NextPage } from "next";
 import { EtherscanPage } from "src/etherscan";
 
 const getLibrary = (provider: any) => {
-  const library = new EtherscanProvider(1);
+  const library = new Web3Provider(provider);
   library.pollingInterval = 12000;
   return library;
 };
