@@ -1,19 +1,21 @@
-import { Web3Provider } from "@ethersproject/providers";
-import { Web3ReactProvider } from "@web3-react/core";
+import { Stack } from "@chakra-ui/layout";
+import { Button } from "@chakra-ui/react";
 import type { NextPage } from "next";
-import { IndexPage } from "src/pages";
-
-const getLibrary = (provider: any) => {
-  const library = new Web3Provider(provider);
-  library.pollingInterval = 12000;
-  return library;
-};
+import Link from "next/link";
 
 const Home: NextPage = () => {
   return (
-    <Web3ReactProvider getLibrary={getLibrary}>
-      <IndexPage />
-    </Web3ReactProvider>
+    <Stack mt={8} direction="column">
+      <Link href="/ethereum">
+        <Button variant="link">ethereum</Button>
+      </Link>
+      <Link href="/etherscan">
+        <Button variant="link">etherscan</Button>
+      </Link>
+      <Link href="/opensea">
+        <Button variant="link">OpenSea API</Button>
+      </Link>
+    </Stack>
   );
 };
 

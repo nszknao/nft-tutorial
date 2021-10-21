@@ -4,7 +4,7 @@ import React, { useEffect, useState, VFC } from "react";
 import { Header } from "src/components/Header";
 import { seaport } from "src/lib/opensea";
 
-export const OpenseaPage: VFC = () => {
+export const Opensea: VFC = () => {
   const [assets, setAssets] = useState<string[]>([]);
   const { account } = useWeb3React<Web3Provider>();
 

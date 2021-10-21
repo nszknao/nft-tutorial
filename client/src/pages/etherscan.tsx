@@ -73,7 +73,7 @@ const Transactions: React.VFC = () => {
   );
 };
 
-export const EtherscanPage: VFC = () => {
+export const Etherscan: VFC = () => {
   return (
     <>
       <Header />

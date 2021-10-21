@@ -1,7 +1,7 @@
 import { Web3Provider } from "@ethersproject/providers";
 import { Web3ReactProvider } from "@web3-react/core";
 import type { NextPage } from "next";
-import { Opensea } from "src/pages/opensea";
+import { Ethereum } from "src/pages/ethereum";
 
 const getLibrary = (provider: any) => {
   const library = new Web3Provider(provider);
@@ -12,7 +12,7 @@ const getLibrary = (provider: any) => {
 const Home: NextPage = () => {
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-      <Opensea />
+      <Ethereum />
     </Web3ReactProvider>
   );
 };
