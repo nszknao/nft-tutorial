@@ -5,6 +5,9 @@
   "repository": "git@github.com:nszknao/nft-tutorial.git",
   "author": "Naoto Nishizaka <nszk.nao@gmail.com>",
   "license": "MIT",
+  "scripts": {
+    "ii": "yarn && yarn --cwd=./client"
+  },
   "dependencies": {
     "@openzeppelin/contracts": "^4.3.2",
     "@truffle/hdwallet-provider": "^1.5.1",
