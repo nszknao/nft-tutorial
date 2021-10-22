@@ -37,7 +37,11 @@ const Token: React.VFC<TokenProps> = ({ contractAddress, tokenID }) => {
         abi = JSON.parse(data);
       } catch (error) {}
       if (abi === "") return;
-      const contract = new Contract(contractAddress, abi, library?.getSigner());
+      const contract = new Contract(
+        contractAddress,
+        abi,
+        library?.getSigner() as any
+      );
       const _tokenURI: string = await contract.tokenURI(tokenID);
       setTokenURIs((prev) => [...new Set([...prev, _tokenURI])]);
     };

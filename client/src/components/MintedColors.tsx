@@ -15,7 +15,7 @@ export const MintedColors: VFC = () => {
       const contract = new Contract(
         "0x52790Ca9a97c5e3433C2781D942c9C8F3FA6ef21",
         Color.abi,
-        library?.getSigner()
+        library?.getSigner() as any
       );
       const totalSupply = await contract.totalSupply();
       for (let i = 0; i < totalSupply; i++) {
