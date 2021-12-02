@@ -6,14 +6,13 @@ import Link from "next/link";
 const Home: NextPage = () => {
   return (
     <Stack mt={8} direction="column">
-      <Link passHref href="/ethereum">
-        <Button variant="link">ethereum</Button>
+      <Link passHref href="/nft">
+        <Button variant="link">View NFTs</Button>
       </Link>
-      <Link passHref href="/etherscan">
-        <Button variant="link">etherscan</Button>
-      </Link>
-      <Link passHref href="/opensea">
-        <Button variant="link">OpenSea API</Button>
+      <Link passHref href="/market">
+        <Button variant="link" disabled>
+          Go to marketplace (coming soon...)
+        </Button>
       </Link>
     </Stack>
   );
