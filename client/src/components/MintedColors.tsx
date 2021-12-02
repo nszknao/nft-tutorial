@@ -24,7 +24,7 @@ export const MintedColors: VFC = () => {
       }
     };
     func();
-  }, [account]);
+  }, [account, library]);
 
   return (
     <Grid templateColumns="repeat(4, 1fr)" gap={6} placeItems="center" mt={4}>

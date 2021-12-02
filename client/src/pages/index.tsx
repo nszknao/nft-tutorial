@@ -11,7 +11,7 @@ import { Header } from "src/components/Header";
 import { MintedColors } from "src/components/MintedColors";
 
 export const IndexPage: VFC = () => {
-  const [color, setColor] = useState<HTMLInputElement | null>(null);
+  const [, setColor] = useState<HTMLInputElement | null>(null);
 
   return (
     <>

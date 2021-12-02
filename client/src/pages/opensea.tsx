@@ -1,3 +1,4 @@
+import { Image } from "@chakra-ui/react";
 import { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
 import React, { useEffect, useState, VFC } from "react";
@@ -27,7 +28,7 @@ export const Opensea: VFC = () => {
         <h1>OpenSea</h1>
         <div>
           {assets.map((asset, idx) => (
-            <img key={idx} src={asset} alt={`${idx}`} />
+            <Image key={idx} src={asset} alt={`${idx}`} />
           ))}
         </div>
       </div>
