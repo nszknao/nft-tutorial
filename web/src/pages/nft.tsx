@@ -2,6 +2,7 @@ import { Box, Flex, Heading, Image } from "@chakra-ui/react";
 import { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
 import React, { VFC } from "react";
+import { useEagerConnect } from "src/hooks/useEagerConnect";
 import { injectedConnector } from "src/lib/web3";
 import useSWR from "swr";
 
@@ -42,7 +43,6 @@ const Contents: VFC<Props> = ({ account }) => {
     ["/assets", { owner: account }],
     fetcher
   );
-  console.log(data);
 
   return (
     <div>
@@ -64,6 +64,8 @@ const Contents: VFC<Props> = ({ account }) => {
 
 export const NFT: VFC = () => {
   const { account, activate, active } = useWeb3React<Web3Provider>();
+
+  useEagerConnect();
 
   const connect = async () => {
     activate(injectedConnector);
