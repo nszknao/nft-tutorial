@@ -1,7 +1,7 @@
 {
   "solidity.defaultCompiler": "localNodeModule",
   "solidity.packageDefaultDependenciesContractsDirectory": "",
-  "solidity.packageDefaultDependenciesDirectory": "node_modules",
+  "solidity.packageDefaultDependenciesDirectory": "kryptobirdz/node_modules",
   "[javascript]": {
     "editor.formatOnSave": true,
   },
