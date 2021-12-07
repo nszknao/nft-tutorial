@@ -1,5 +1,10 @@
 require("@nomiclabs/hardhat-waffle");
+const fs = require("fs");
 
+const keyData = fs.readFileSync("./p-key.txt", {
+  encoding: "utf8",
+  flag: "r",
+});
 const projectId = "cec29c153c8f4de5849a5a99d88965e6";
 
 /**
@@ -13,11 +18,11 @@ module.exports = {
     },
     rinkeby: {
       url: `https://rinkeby.infura.io/v3/${projectId}`,
-      accounts: [],
+      accounts: [keyData],
     },
     mainnet: {
       url: `https://mainnet.infura.io/v3/${projectId}`,
-      accounts: [],
+      accounts: [keyData],
     },
   },
   solidity: {
