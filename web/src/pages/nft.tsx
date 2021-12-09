@@ -1,10 +1,9 @@
-import { Box, Flex, Heading, Image } from "@chakra-ui/react";
+import { Flex, Heading, Image } from "@chakra-ui/react";
 import { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
 import React, { VFC } from "react";
-import { useEagerConnect } from "../hooks/useEagerConnect";
-import { injectedConnector } from "../lib/web3";
 import useSWR from "swr";
+import { ConnectWallet } from "../components/connect-wallet";
 
 type OpenSeaAsset = {
   asset_contract: {
@@ -63,13 +62,7 @@ const Contents: VFC<Props> = ({ account }) => {
 };
 
 export const NFT: VFC = () => {
-  const { account, activate, active, library } = useWeb3React<Web3Provider>();
-
-  useEagerConnect();
-
-  const connect = async () => {
-    activate(injectedConnector);
-  };
+  const { account, library } = useWeb3React<Web3Provider>();
 
   return (
     <>
@@ -84,10 +77,7 @@ export const NFT: VFC = () => {
         <Heading as="h1" size="md" letterSpacing="tighter">
           View NFTs
         </Heading>
-        <Box>
-          {account}
-          {!active && <button onClick={connect}>Connect Wallet</button>}
-        </Box>
+        <ConnectWallet />
         <button
           onClick={async () => {
             const signer = await library?.provider.request?.({

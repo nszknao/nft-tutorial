@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "test": "hardhat test",
-    "compile": "hardhat compile --force"
+    "compile": "hardhat compile --force",
+    "node": "hardhat node --hostname 0.0.0.0",
+    "deploy:local": "hardhat run --network localhost scripts/deploy.ts"
   },
   "dependencies": {
     "@openzeppelin/contracts": "^4.3.2",

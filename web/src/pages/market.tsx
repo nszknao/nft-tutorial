@@ -2,12 +2,12 @@ import { MarketTokenStructOutput } from "@/typechain/KBMarket";
 import KBMarket from "@/artifacts/contracts/KBMarket.sol/KBMarket.json";
 import NFT from "@/artifacts/contracts/NFT.sol/NFT.json";
 import { nftaddress, nftmarketaddress } from "@/web/const/config";
-import { Box, Button, Flex, Grid, Heading, Image } from "@chakra-ui/react";
+import { MarketLayout } from "@/web/layout/market";
+import { Box, Button, Flex, Grid, Image } from "@chakra-ui/react";
 import { Contract } from "@ethersproject/contracts";
 import { JsonRpcProvider } from "@ethersproject/providers";
 import { formatUnits, parseUnits } from "@ethersproject/units";
 import axios from "axios";
-import Link from "next/link";
 import React, { useCallback, useEffect, useState, VFC } from "react";
 
 type INFT = {
@@ -74,32 +74,7 @@ export const Market: VFC = () => {
   }, [loadNFTs]);
 
   return (
-    <div>
-      <Flex
-        as="nav"
-        align="center"
-        justify="space-between"
-        padding={4}
-        bg="teal.500"
-        color="white"
-      >
-        <Heading as="h1" size="md" letterSpacing="tighter">
-          Kryptobirdz
-        </Heading>
-        <Link href="/">
-          <a>Main Marketplace</a>
-        </Link>
-        <Link href="/mint-item">
-          <a>Mint Tokens</a>
-        </Link>
-        <Link href="/my-nfts">
-          <a>My NFTs</a>
-        </Link>
-        <Link href="/account-dashborad">
-          <a>Account Dashboard</a>
-        </Link>
-      </Flex>
-
+    <MarketLayout>
       {loading === "loaded" && !nfts.length ? (
         <h1>No NFTs in marketplace</h1>
       ) : (
@@ -119,6 +94,6 @@ export const Market: VFC = () => {
           </Grid>
         </Flex>
       )}
-    </div>
+    </MarketLayout>
   );
 };
