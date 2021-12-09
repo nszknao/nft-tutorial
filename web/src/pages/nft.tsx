@@ -2,8 +2,8 @@ import { Box, Flex, Heading, Image } from "@chakra-ui/react";
 import { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
 import React, { VFC } from "react";
-import { useEagerConnect } from "src/hooks/useEagerConnect";
-import { injectedConnector } from "src/lib/web3";
+import { useEagerConnect } from "../hooks/useEagerConnect";
+import { injectedConnector } from "../lib/web3";
 import useSWR from "swr";
 
 type OpenSeaAsset = {
@@ -63,7 +63,7 @@ const Contents: VFC<Props> = ({ account }) => {
 };
 
 export const NFT: VFC = () => {
-  const { account, activate, active } = useWeb3React<Web3Provider>();
+  const { account, activate, active, library } = useWeb3React<Web3Provider>();
 
   useEagerConnect();
 
@@ -88,6 +88,17 @@ export const NFT: VFC = () => {
           {account}
           {!active && <button onClick={connect}>Connect Wallet</button>}
         </Box>
+        <button
+          onClick={async () => {
+            const signer = await library?.provider.request?.({
+              method: "eth_sign",
+              params: [account, "Sign!!!"],
+            });
+            console.log(signer);
+          }}
+        >
+          getSigners()
+        </button>
       </Flex>
 
       {account != null && <Contents account={account} />}

@@ -1,0 +1,32 @@
+{
+  "name": "nft-tutorial",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:nszknao/nft-tutorial.git",
+  "author": "Naoto Nishizaka <nszk.nao@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "hardhat test",
+    "compile": "hardhat compile --force"
+  },
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.3.2",
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "@nomiclabs/hardhat-ethers": "^2.0.3",
+    "@nomiclabs/hardhat-waffle": "^2.0.1",
+    "@typechain/ethers-v5": "^8.0.5",
+    "@typechain/hardhat": "^3.0.0",
+    "@types/chai": "^4.3.0",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "^16.11.12",
+    "chai": "4.3.4",
+    "chai-as-promised": "7.1.1",
+    "ethereum-waffle": "^3.4.0",
+    "hardhat": "^2.7.0",
+    "ts-node": "^10.4.0",
+    "typechain": "^6.0.5",
+    "typescript": "^4.5.2"
+  }
+}

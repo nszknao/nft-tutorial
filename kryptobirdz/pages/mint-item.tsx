@@ -1,13 +1,4 @@
-import {
-  Box,
-  Button,
-  Flex,
-  Grid,
-  Heading,
-  Image,
-  Input,
-  Textarea,
-} from "@chakra-ui/react";
+import { Box, Button, Image, Input, Textarea } from "@chakra-ui/react";
 import { ethers } from "ethers";
 import { create as ipfsHttpClient } from "ipfs-http-client";
 import { useRouter } from "next/router";
@@ -121,7 +112,7 @@ const MintItem: VFC = () => {
         }
       />
       <Input type="file" name="Asset" onChange={onChange} />
-      {fileUrl && <Image w="350px" src={fileUrl} />}
+      {fileUrl && <Image alt="preview image" w="350px" src={fileUrl} />}
 
       <Button onClick={createMarket}>Mint NFT</Button>
     </Box>

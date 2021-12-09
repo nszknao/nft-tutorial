@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/artifacts/*": ["./contract/artifacts/*"],
+      "@/typechain/*": ["./contract/typechain/*"]
+    },
+    "strict": true
+  },
+  "exclude": ["dist", "node_modules"],
+  "include": ["**/*"]
+}
