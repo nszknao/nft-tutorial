@@ -1,6 +1,6 @@
 import { useWeb3React } from "@web3-react/core";
 import { useEffect } from "react";
-import { injectedConnector } from "src/lib/web3";
+import { injectedConnector } from "@/web/lib/web3";
 
 /**
  * Hook to activate when MetaMask is connected.

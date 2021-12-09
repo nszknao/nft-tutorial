@@ -1,7 +1,7 @@
+import { getLibrary } from "@/web/lib/web3";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Web3ReactProvider } from "@web3-react/core";
 import type { AppProps } from "next/app";
-import { getLibrary } from "src/lib/web3";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import { Market } from "src/pages/market";
+import { Market } from "@/web/pages/market";
 
 const MarketPage: NextPage = () => {
   return <Market />;

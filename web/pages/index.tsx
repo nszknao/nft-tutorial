@@ -10,9 +10,7 @@ const Home: NextPage = () => {
         <Button variant="link">View NFTs</Button>
       </Link>
       <Link passHref href="/market">
-        <Button variant="link" disabled>
-          Go to marketplace (coming soon...)
-        </Button>
+        <Button variant="link">Go to marketplace</Button>
       </Link>
     </Stack>
   );
