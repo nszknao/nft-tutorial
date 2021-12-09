@@ -3039,7 +3039,7 @@ ipfs-core-utils@^0.12.2:
     timeout-abort-controller "^1.1.1"
     uint8arrays "^3.0.0"
 
-ipfs-http-client@^54.0.2:
+ipfs-http-client@54.0.2:
   version "54.0.2"
   resolved "https://registry.yarnpkg.com/ipfs-http-client/-/ipfs-http-client-54.0.2.tgz#56871a7103e81a69658d796e112e917a2dbf9e48"
   integrity sha512-gPTD+Hy7UdiM+Ez9n+PJmSQ5m1fShhDhIkZ+lTY2L9p7KFOU643qACqUrdZZjlZIRWHg4htHSYNPnTRh2bjOjA==
