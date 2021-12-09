@@ -1624,7 +1624,7 @@ axe-core@^4.3.5:
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.3.5.tgz#78d6911ba317a8262bfee292aeafcc1e04b49cc5"
   integrity sha512-WKTW1+xAzhMS5dJsxWkliixlO/PqC4VhmO9T4juNYcaTg9jzWiJsou6m5pxWYGfigWbwzJWeFY6z47a+4neRXA==
 
-axios@^0.24.0:
+axios@0.24.0:
   version "0.24.0"
   resolved "https://registry.yarnpkg.com/axios/-/axios-0.24.0.tgz#804e6fa1e4b9c5288501dd9dff56a7a0940d20d6"
   integrity sha512-Q6cWsys88HoPgAaFAVUb0WpPk0O8iTeisR9IMqy9G8AbO4NlpVknrnQS03zzF9PGAWgO3cgletO3VjV/P7VztA==
@@ -2671,10 +2671,10 @@ foreach@^2.0.5:
   resolved "https://registry.yarnpkg.com/foreach/-/foreach-2.0.5.tgz#0bee005018aeb260d0a3af3ae658dd0136ec1b99"
   integrity sha1-C+4AUBiusmDQo6865ljdATbsG5k=
 
-framer-motion@5.4.4:
-  version "5.4.4"
-  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-5.4.4.tgz#28e12aed79fe6041b9c7ff5de4308946b7d14b8f"
-  integrity sha512-R2IE9EdmsKpliqyA+6U7biRnLdAHBXh510oFZLLWg5ZbFQYg1UsSLCZD3AXWFLQxOKn0C6ohZb7y0R9XpsriFA==
+framer-motion@5.4.5:
+  version "5.4.5"
+  resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-5.4.5.tgz#180047afe6d4e41b8b69eb76cfad13d7a0351073"
+  integrity sha512-OjKfSMO22a9bTedhQ4diwZWCcmwoZmfrkalv4adhHTH2/cXa2eoFAmmPzs6aNpENbMrn47YmlWGwZtYNycXFLg==
   dependencies:
     framesync "6.0.1"
     hey-listen "^1.0.8"
