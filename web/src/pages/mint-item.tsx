@@ -76,8 +76,17 @@ export const MintItem: VFC = () => {
       console.log(formInput, fileUrl);
       return;
     }
+    // upload to IPFS
+    const data = JSON.stringify({
+      name: formInput.name,
+      description: formInput.description,
+      image: fileUrl,
+    });
+
     try {
-      createSale(fileUrl);
+      const added = await client.add(data);
+      const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+      createSale(url);
     } catch (error) {
       console.log("Error uploading file: ", error);
     }

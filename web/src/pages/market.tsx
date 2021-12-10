@@ -39,6 +39,7 @@ export const Market: VFC = () => {
       data.map(async (item) => {
         const tokenUri = await tokenContract.functions.tokenURI(item.tokenId);
         const meta = await axios.get(tokenUri);
+        console.log(tokenUri);
         const price = formatUnits(item.price.toString(), "ether");
         return {
           price,
