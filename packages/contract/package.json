@@ -13,7 +13,8 @@
     "test": "hardhat test",
     "compile": "hardhat compile --force",
     "node": "hardhat node --hostname 0.0.0.0",
-    "deploy:local": "hardhat run --network localhost scripts/deploy.ts"
+    "deploy:local": "hardhat run --network localhost scripts/deploy.ts",
+    "deploy:rinkeby": "hardhat run --network rinkeby scripts/deploy.ts"
   },
   "dependencies": {
     "@openzeppelin/contracts": "4.3.2",
