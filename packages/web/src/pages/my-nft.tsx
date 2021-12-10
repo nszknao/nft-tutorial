@@ -1,6 +1,6 @@
 import { useFetchMyNFTs } from "@/web/hooks/useFetchMyNFTs";
 import { MarketLayout } from "@/web/layout/market";
-import { Box, Button, Grid, Image } from "@chakra-ui/react";
+import { Box, Grid, Image } from "@chakra-ui/react";
 import { VFC } from "react";
 
 export const MyNFT: VFC = () => {

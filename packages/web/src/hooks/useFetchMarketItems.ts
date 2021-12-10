@@ -30,7 +30,6 @@ export const useFetchMarketItems = () => {
       data.map(async (item) => {
         const tokenUri = await nft.tokenURI(item.tokenId);
         const meta = await axios.get(tokenUri);
-        console.log(tokenUri);
         const price = formatUnits(item.price.toString(), "ether");
         return {
           price,

@@ -1,14 +1,13 @@
 {
-  "name": "nft-tutorial",
+  "name": "contract",
   "version": "1.0.0",
   "main": "dist/index",
   "author": "Naoto Nishizaka",
   "private": true,
   "license": "MIT",
   "scripts": {
-    "build": "yarn run clean && yarn build:sol && yarn build:ts",
+    "build": "yarn run clean && yarn build:sol",
     "build:sol": "yarn run compile",
-    "build:ts": "tsc",
     "clean": "yarn run clean:sol",
     "clean:sol": "hardhat clean",
     "test": "hardhat test",

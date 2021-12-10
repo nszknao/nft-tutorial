@@ -25,6 +25,9 @@
           "typechain/**"
         ]
       },
+      "web#build": {
+        "dependsOn": ["contract#build"]
+      },
       "test": {
         "dependsOn": [
           "build"
