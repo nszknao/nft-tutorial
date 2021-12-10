@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
+    "target": "ES2017",
+    "baseUrl": "./packages",
     "paths": {
-      "@/artifacts/*": ["./contract/artifacts/*"],
-      "@/typechain/*": ["./contract/typechain/*"],
-      "@/web/*": ["./web/src/*"]
+      "@/artifacts/*": ["contract/artifacts/*"],
+      "@/typechain/*": ["contract/typechain/*"],
+      "@/web/*": ["web/src/*"]
     },
     "strict": true
   },

@@ -1,0 +1,38 @@
+{
+  "name": "nft-marketplace",
+  "version": "1.0.0",
+  "repository": "git@github.com:nszknao/nft-tutorial.git",
+  "author": "Naoto Nishizaka",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "test": "turbo run test"
+  },
+  "turbo": {
+    "baseBranch": "origin/main",
+    "pipeline": {
+      "build": {
+        "dependsOn": [
+          "^build"
+        ],
+        "outputs": [
+          ".next/**",
+          "artifacts/**",
+          "typechain/**"
+        ]
+      },
+      "test": {
+        "dependsOn": [
+          "build"
+        ]
+      }
+    }
+  },
+  "devDependencies": {
+    "turbo": "^1.0.4"
+  }
+}

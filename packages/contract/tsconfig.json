@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "module": "CommonJS",
+    "declaration": true,
+    "declarationMap": true,
+    "esModuleInterop": true,
+    "sourceMap": true,
+    "strict": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "Node",
+    "isolatedModules": true,
+    "outDir": "./dist",
+    "rootDirs": ["./scripts", "./tests", "./typechain"],
+  },
+  "extends": "../../tsconfig.base.json",
+  "exclude": ["**/node_modules"],
+  "files": ["./hardhat.config.ts"],
+  "include": [
+    "./scripts",
+    "./tests",
+    "./typechain"
+  ]
+}
