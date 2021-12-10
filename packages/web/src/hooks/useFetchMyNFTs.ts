@@ -1,11 +1,10 @@
 import { KBMarket__factory } from "@/typechain/factories/KBMarket__factory";
 import { NFT__factory } from "@/typechain/factories/NFT__factory";
+import { nftaddress, nftmarketaddress } from "@/web/const/config";
 import { JsonRpcProvider, Web3Provider } from "@ethersproject/providers";
 import { formatUnits } from "@ethersproject/units";
 import { useWeb3React } from "@web3-react/core";
-import axios from "axios";
-import { useCallback, useEffect, useState } from "react";
-import { nftaddress, nftmarketaddress } from "../const/config";
+import useSWR from "swr";
 
 type MyNFT = {
   price: string;
@@ -18,11 +17,9 @@ type MyNFT = {
 };
 
 export const useFetchMyNFTs = () => {
-  const [nfts, setNfts] = useState<MyNFT[]>([]);
-  const [loading, setLoading] = useState("not loaded");
   const { library } = useWeb3React<Web3Provider>();
 
-  const loadNFTs = useCallback(async () => {
+  const { data, mutate } = useSWR<MyNFT[] | undefined>("/", async () => {
     if (library === undefined) return;
     const provider = new JsonRpcProvider();
     const nft = NFT__factory.connect(nftaddress, provider);
@@ -34,26 +31,22 @@ export const useFetchMyNFTs = () => {
     const items = await Promise.all(
       data.map(async (item) => {
         const tokenUri = await nft.tokenURI(item.tokenId);
-        const meta = await axios.get(tokenUri);
+        const res = await fetch(tokenUri);
+        const meta = await res.json();
         const price = formatUnits(item.price.toString(), "ether");
         return {
           price,
           tokenId: item.tokenId.toString(),
           seller: item.seller,
           owner: item.owner,
-          image: meta.data.image,
-          name: meta.data.name,
-          description: meta.data.description,
+          image: meta.image,
+          name: meta.name,
+          description: meta.description,
         };
       })
     );
-    setNfts(items);
-    setLoading("loaded");
-  }, []);
+    return items;
+  });
 
-  useEffect(() => {
-    loadNFTs();
-  }, [loadNFTs]);
-
-  return { nfts, loading, loadNFTs };
+  return { data, mutate };
 };

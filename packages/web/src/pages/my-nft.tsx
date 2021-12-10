@@ -4,16 +4,16 @@ import { Box, Grid, Image } from "@chakra-ui/react";
 import { VFC } from "react";
 
 export const MyNFT: VFC = () => {
-  const { loading, nfts } = useFetchMyNFTs();
+  const { data } = useFetchMyNFTs();
 
-  if (loading === "loaded" && !nfts.length) {
+  if (data !== undefined && data.length === 0) {
     return <h1>You do not own any NFTs currently :(</h1>;
   }
 
   return (
     <MarketLayout>
       <Grid>
-        {nfts.map((nft, index) => (
+        {data?.map((nft, index) => (
           <Box key={index} border={1} shadow="md" rounded="md">
             <Image src={nft.image} alt={`image#${index}`} />
             <Box p={4}>

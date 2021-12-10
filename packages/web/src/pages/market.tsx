@@ -9,10 +9,10 @@ import { Box, Button, Flex, Grid, Image } from "@chakra-ui/react";
 import { Web3Provider } from "@ethersproject/providers";
 import { parseUnits } from "@ethersproject/units";
 import { useWeb3React } from "@web3-react/core";
-import { useEffect, type VFC } from "react";
+import { type VFC } from "react";
 
 export const Market: VFC = () => {
-  const { nfts, loading, loadNFTs } = useFetchMarketItems();
+  const { data, mutate } = useFetchMarketItems();
   const { library } = useWeb3React<Web3Provider>();
 
   const buyNFT = async (item: MarketItem) => {
@@ -28,22 +28,18 @@ export const Market: VFC = () => {
     );
 
     await transaction.wait();
-    loadNFTs();
+    mutate();
   };
-
-  useEffect(() => {
-    loadNFTs();
-  }, [loadNFTs]);
 
   return (
     <MarketLayout>
-      {loading === "loaded" && !nfts.length ? (
+      {data !== undefined && data.length === 0 ? (
         <h1>No NFTs in marketplace</h1>
       ) : (
         <Flex>
           <Box px={4}></Box>
           <Grid>
-            {nfts.map((nft, index) => (
+            {data?.map((nft, index) => (
               <Box key={index} border={1} shadow="md" rounded="md">
                 <Image src={nft.image} alt={`image#${index}`} />
                 <Box p={4}>
