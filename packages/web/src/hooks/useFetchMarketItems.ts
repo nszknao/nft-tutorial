@@ -1,6 +1,6 @@
 import { KBMarket__factory } from "@/typechain/factories/KBMarket__factory";
 import { NFT__factory } from "@/typechain/factories/NFT__factory";
-import { nftaddress, nftmarketaddress } from "@/web/const/config";
+import { networkid, nftaddress, nftmarketaddress } from "@/web/const/config";
 import { JsonRpcProvider } from "@ethersproject/providers";
 import { formatUnits } from "@ethersproject/units";
 import useSWR from "swr";
@@ -17,7 +17,7 @@ export type MarketItem = {
 
 export const useFetchMarketItems = () => {
   const { data, mutate } = useSWR<MarketItem[]>("/", async () => {
-    const provider = new JsonRpcProvider();
+    const provider = new JsonRpcProvider(undefined, networkid);
     const nft = NFT__factory.connect(nftaddress, provider);
     const market = KBMarket__factory.connect(nftmarketaddress, provider);
     const data = await market.fetchMarketTokens();

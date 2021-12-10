@@ -1,6 +1,6 @@
 import { KBMarket__factory } from "@/typechain/factories/KBMarket__factory";
 import { NFT__factory } from "@/typechain/factories/NFT__factory";
-import { nftaddress, nftmarketaddress } from "@/web/const/config";
+import { networkid, nftaddress, nftmarketaddress } from "@/web/const/config";
 import { JsonRpcProvider, Web3Provider } from "@ethersproject/providers";
 import { formatUnits } from "@ethersproject/units";
 import { useWeb3React } from "@web3-react/core";
@@ -21,7 +21,7 @@ export const useFetchMyNFTs = () => {
 
   const { data, mutate } = useSWR<MyNFT[] | undefined>("/", async () => {
     if (library === undefined) return;
-    const provider = new JsonRpcProvider();
+    const provider = new JsonRpcProvider(undefined, networkid);
     const nft = NFT__factory.connect(nftaddress, provider);
 
     const signer = library.getSigner();
