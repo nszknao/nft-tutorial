@@ -1,7 +1,7 @@
 {
   "solidity.defaultCompiler": "localNodeModule",
   "solidity.packageDefaultDependenciesContractsDirectory": "",
-  "solidity.packageDefaultDependenciesDirectory": "contract/node_modules",
+  "solidity.packageDefaultDependenciesDirectory": "node_modules",
   "[javascript]": {
     "editor.formatOnSave": true,
   },

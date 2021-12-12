@@ -41,7 +41,6 @@ export const MintItem: VFC = () => {
   const createSale = async (url: string) => {
     if (library === undefined) return;
     const signer = library.getSigner();
-    // @ts-ignore
     const nft = NFT__factory.connect(nftaddress, signer);
     let transaction = await nft.mintToken(url);
     const tx = await transaction.wait();
@@ -50,7 +49,6 @@ export const MintItem: VFC = () => {
     const tokenId = value.toString();
     const price = parseUnits(formInput.price, "ether");
 
-    // @ts-ignore
     const market = KBMarket__factory.connect(nftmarketaddress, signer);
     const listingPrice = await market.getListingPrice();
 
