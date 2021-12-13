@@ -1,35 +1,12 @@
-import { KBMarket__factory } from "@/typechain/factories/KBMarket__factory";
-import { nftaddress, nftmarketaddress } from "@/web/const/config";
-import {
-  MarketItem,
-  useFetchMarketItems,
-} from "@/web/hooks/useFetchMarketItems";
+import { useBuyItem } from "@/web/hooks/useBuyItem";
+import { useFetchMarketItems } from "@/web/hooks/useFetchMarketItems";
 import { MarketLayout } from "@/web/layout/market";
 import { Box, Button, Flex, Grid, Image } from "@chakra-ui/react";
-import { Web3Provider } from "@ethersproject/providers";
-import { parseUnits } from "@ethersproject/units";
-import { useWeb3React } from "@web3-react/core";
 import { type VFC } from "react";
 
 export const Market: VFC = () => {
   const { data, mutate } = useFetchMarketItems();
-  const { library } = useWeb3React<Web3Provider>();
-
-  const buyNFT = async (item: MarketItem) => {
-    if (library === undefined) return;
-    const signer = library.getSigner();
-    const market = KBMarket__factory.connect(nftmarketaddress, signer);
-
-    const price = parseUnits(item.price.toString(), "ether");
-    const transaction = await market.createMarketSale(
-      nftaddress,
-      item.tokenId,
-      { value: price }
-    );
-
-    await transaction.wait();
-    mutate();
-  };
+  const { buyItem } = useBuyItem();
 
   return (
     <MarketLayout>
@@ -45,7 +22,14 @@ export const Market: VFC = () => {
                 <Box p={4}>
                   <p>{nft.description}</p>
                   <div>{nft.price} ETH</div>
-                  <Button onClick={() => buyNFT(nft)}>Buy</Button>
+                  <Button
+                    onClick={() => {
+                      buyItem(nft);
+                      mutate();
+                    }}
+                  >
+                    Buy
+                  </Button>
                 </Box>
               </Box>
             ))}

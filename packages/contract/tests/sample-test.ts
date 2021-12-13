@@ -1,7 +1,7 @@
 import { ethers } from "hardhat";
 
-import type { KBMarket } from "../typechain/KBMarket";
-import type { NFT } from "../typechain/NFT";
+import type { KBMarket } from "@/typechain/KBMarket";
+import type { NFT } from "@/typechain/NFT";
 
 describe("KBMarket", function () {
   it("Should mint and trade NFTs. ", async function () {
