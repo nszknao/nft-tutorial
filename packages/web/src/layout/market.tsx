@@ -1,7 +1,7 @@
 import { Flex, Heading } from "@chakra-ui/react";
 import Link from "next/link";
 import { ReactNode, VFC } from "react";
-import { ConnectWallet } from "../components/connect-wallet";
+import { ConnectWallet } from "../components/ConnectWallet";
 
 type Props = {
   children: ReactNode;

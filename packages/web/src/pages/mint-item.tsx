@@ -1,14 +1,10 @@
-import { KBMarket__factory } from "@/typechain/factories/KBMarket__factory";
-import { NFT__factory } from "@/typechain/factories/NFT__factory";
-import { nftaddress, nftmarketaddress } from "@/web/const/config";
 import { MarketLayout } from "@/web/layout/market";
 import { Box, Button, Image, Input, Textarea } from "@chakra-ui/react";
-import { Web3Provider } from "@ethersproject/providers";
 import { parseUnits } from "@ethersproject/units";
-import { useWeb3React } from "@web3-react/core";
 import { create as ipfsHttpClient } from "ipfs-http-client";
 import { useRouter } from "next/router";
 import { ChangeEvent, useState, VFC } from "react";
+import { useMarketContract, useNFTContract } from "../hooks/useContract";
 
 const client = ipfsHttpClient({
   url: "https://ipfs.infura.io:5001/api/v0",
@@ -22,7 +18,8 @@ export const MintItem: VFC = () => {
     description: "",
   });
   const router = useRouter();
-  const { library } = useWeb3React<Web3Provider>();
+  const market = useMarketContract();
+  const nft = useNFTContract();
 
   const onChange = async (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files === null) return;
@@ -39,9 +36,7 @@ export const MintItem: VFC = () => {
   };
 
   const createSale = async (url: string) => {
-    if (library === undefined) return;
-    const signer = library.getSigner();
-    const nft = NFT__factory.connect(nftaddress, signer);
+    if (!market || !nft) return;
     let transaction = await nft.mintToken(url);
     const tx = await transaction.wait();
     const event = tx.events?.[0];
@@ -49,10 +44,9 @@ export const MintItem: VFC = () => {
     const tokenId = value.toString();
     const price = parseUnits(formInput.price, "ether");
 
-    const market = KBMarket__factory.connect(nftmarketaddress, signer);
     const listingPrice = await market.getListingPrice();
 
-    transaction = await market.makeMarketItem(nftaddress, tokenId, price, {
+    transaction = await market.makeMarketItem(nft.address, tokenId, price, {
       value: listingPrice.toString(),
     });
     await transaction.wait();

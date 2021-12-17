@@ -3,7 +3,7 @@ import { Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
 import React, { VFC } from "react";
 import useSWR from "swr";
-import { ConnectWallet } from "../components/connect-wallet";
+import { ConnectWallet } from "../components/ConnectWallet";
 
 type OpenSeaAsset = {
   asset_contract: {

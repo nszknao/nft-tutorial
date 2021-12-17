@@ -2,9 +2,12 @@ import dotenv from "dotenv";
 
 import "tsconfig-paths/lib/register";
 
+import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-ethers";
 import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
+
+import { HardhatUserConfig } from "hardhat/types";
 
 dotenv.config();
 
@@ -13,10 +16,7 @@ const accounts =
     ? [process.env.WALLET_PRIVATE_KEY]
     : [];
 
-/**
- * @type import('hardhat/config').HardhatUserConfig
- */
-module.exports = {
+const config: HardhatUserConfig = {
   defaultNetwork: "hardhat",
   networks: {
     hardhat: {
@@ -30,6 +30,9 @@ module.exports = {
       url: `https://mainnet.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
       accounts,
     },
+  },
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_API_KEY,
   },
   solidity: {
     version: "0.8.4",
@@ -52,3 +55,5 @@ module.exports = {
     alwaysGenerateOverloads: false,
   },
 };
+
+export default config;

@@ -20,8 +20,11 @@ export const Market: VFC = () => {
               <Box key={index} border={1} shadow="md" rounded="md">
                 <Image src={nft.image} alt={`image#${index}`} />
                 <Box p={4}>
+                  <div>{nft.name}</div>
                   <p>{nft.description}</p>
                   <div>{nft.price} ETH</div>
+                  <div>Owner: {nft.owner}</div>
+                  <div>Seller: {nft.seller}</div>
                   <Button
                     onClick={() => {
                       buyItem(nft);

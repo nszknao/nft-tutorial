@@ -1,6 +1,6 @@
 import { useWeb3React } from "@web3-react/core";
 import { useEffect } from "react";
-import { injectedConnector } from "@/web/lib/web3";
+import { injected } from "../config/wallets";
 
 /**
  * Hook to activate when MetaMask is connected.
@@ -11,9 +11,9 @@ export const useEagerConnect = () => {
   const { activate } = useWeb3React();
 
   useEffect(() => {
-    injectedConnector.isAuthorized().then((isAuthorized) => {
+    injected.isAuthorized().then((isAuthorized) => {
       if (isAuthorized) {
-        activate(injectedConnector, undefined, false);
+        activate(injected, undefined, false);
       }
     });
   }, [activate]);
