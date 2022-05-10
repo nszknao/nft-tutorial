@@ -1,29 +1,29 @@
-import { KBMarket__factory, NFT__factory } from "@/typechain/index";
-import { type Web3Provider } from "@ethersproject/providers";
-import { useWeb3React } from "@web3-react/core";
-import { useMemo } from "react";
+import {
+  KBMarket__factory,
+  KBMarket,
+  NFT__factory,
+  NFT,
+} from "@/typechain/index";
+import { useContract, useSigner } from "wagmi";
 import { chainId } from "../config/chain-id";
 import { MARKET_ADDRESS, NFT_ADDRESS } from "../constants/addresses";
-import { getProviderOrSigner } from "../functions/contract";
 
 export const useMarketContract = (withSignerIfPossible = true) => {
-  const { account, library } = useWeb3React<Web3Provider>();
-  return useMemo(() => {
-    const provider = getProviderOrSigner(
-      library,
-      withSignerIfPossible && account ? account : undefined
-    );
-    return KBMarket__factory.connect(MARKET_ADDRESS[chainId], provider);
-  }, [account, library, withSignerIfPossible]);
+  const { data: signer } = useSigner();
+  const contract = useContract<KBMarket>({
+    addressOrName: MARKET_ADDRESS[chainId],
+    contractInterface: KBMarket__factory.abi,
+    signerOrProvider: withSignerIfPossible && signer ? signer : undefined,
+  });
+  return contract;
 };
 
 export const useNFTContract = (withSignerIfPossible = true) => {
-  const { account, library } = useWeb3React<Web3Provider>();
-  return useMemo(() => {
-    const provider = getProviderOrSigner(
-      library,
-      withSignerIfPossible && account ? account : undefined
-    );
-    return NFT__factory.connect(NFT_ADDRESS[chainId], provider);
-  }, [account, library, withSignerIfPossible]);
+  const { data: signer } = useSigner();
+  const contract = useContract<NFT>({
+    addressOrName: NFT_ADDRESS[chainId],
+    contractInterface: NFT__factory.abi,
+    signerOrProvider: withSignerIfPossible && signer ? signer : undefined,
+  });
+  return contract;
 };

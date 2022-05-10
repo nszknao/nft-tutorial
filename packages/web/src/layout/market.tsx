@@ -1,13 +1,13 @@
 import { Flex, Heading } from "@chakra-ui/react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import Link from "next/link";
-import { ReactNode, VFC } from "react";
-import { ConnectWallet } from "../components/ConnectWallet";
+import { ReactNode, FC } from "react";
 
 type Props = {
   children: ReactNode;
 };
 
-export const MarketLayout: VFC<Props> = ({ children }) => {
+export const MarketLayout: FC<Props> = ({ children }) => {
   return (
     <div>
       <Flex as="nav" align="center" padding={4} bg="teal.500" color="white">
@@ -31,7 +31,7 @@ export const MarketLayout: VFC<Props> = ({ children }) => {
             <a>Account Dashboard</a>
           </Link>
         </Flex>
-        <ConnectWallet />
+        <ConnectButton />
       </Flex>
 
       {children}
