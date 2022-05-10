@@ -36,7 +36,6 @@ export const MintItem: VFC = () => {
   };
 
   const createSale = async (url: string) => {
-    if (!market || !nft) return;
     let transaction = await nft.mintToken(url);
     const tx = await transaction.wait();
     const event = tx.events?.[0];
@@ -60,7 +59,7 @@ export const MintItem: VFC = () => {
       !formInput.price ||
       !fileUrl
     ) {
-      console.log(formInput, fileUrl);
+      console.error(formInput, fileUrl);
       return;
     }
     // upload to IPFS

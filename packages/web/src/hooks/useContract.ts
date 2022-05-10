@@ -1,13 +1,12 @@
-import { KBMarket__factory } from "@/typechain/factories/KBMarket__factory";
-import { NFT__factory } from "@/typechain/factories/NFT__factory";
-import { Web3Provider } from "@ethersproject/providers";
+import { KBMarket__factory, NFT__factory } from "@/typechain/index";
+import { type Web3Provider } from "@ethersproject/providers";
 import { useWeb3React } from "@web3-react/core";
 import { useMemo } from "react";
 import { chainId } from "../config/chain-id";
 import { MARKET_ADDRESS, NFT_ADDRESS } from "../constants/addresses";
 import { getProviderOrSigner } from "../functions/contract";
 
-export const useMarketContract = (withSignerIfPossible = false) => {
+export const useMarketContract = (withSignerIfPossible = true) => {
   const { account, library } = useWeb3React<Web3Provider>();
   return useMemo(() => {
     const provider = getProviderOrSigner(
@@ -18,7 +17,7 @@ export const useMarketContract = (withSignerIfPossible = false) => {
   }, [account, library, withSignerIfPossible]);
 };
 
-export const useNFTContract = (withSignerIfPossible = false) => {
+export const useNFTContract = (withSignerIfPossible = true) => {
   const { account, library } = useWeb3React<Web3Provider>();
   return useMemo(() => {
     const provider = getProviderOrSigner(

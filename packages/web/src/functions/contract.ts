@@ -6,11 +6,9 @@ import {
 import { chainId } from "../config/chain-id";
 import { rpc } from "../config/rpc";
 
-export const getSigner = (
-  library: Web3Provider,
-  account: string
-): JsonRpcSigner => {
-  return library.getSigner(account).connectUnchecked();
+export const getSigner = (account: string): JsonRpcSigner => {
+  const provider = new JsonRpcProvider(rpc[chainId], chainId);
+  return provider.getSigner(account).connectUnchecked();
 };
 
 export const getProviderOrSigner = (
@@ -18,6 +16,7 @@ export const getProviderOrSigner = (
   account?: string | null
 ): JsonRpcProvider | JsonRpcSigner => {
   return account && library
-    ? getSigner(library, account)
-    : new JsonRpcProvider(rpc[chainId], chainId);
+    ? library.getSigner(account)
+    : // ? getSigner(account)
+      new JsonRpcProvider(rpc[chainId], chainId);
 };

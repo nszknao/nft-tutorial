@@ -1,5 +1,4 @@
-import { KBMarket } from "@/typechain/KBMarket";
-import { NFT } from "@/typechain/NFT";
+import { KBMarket, NFT } from "@/typechain/index";
 import { formatUnits } from "@ethersproject/units";
 import useSWR from "swr";
 import { useMarketContract, useNFTContract } from "./useContract";
@@ -38,8 +37,8 @@ const fetcher = async (market: KBMarket, nft: NFT) => {
 };
 
 export const useFetchMyNFTs = () => {
-  const market = useMarketContract(true);
-  const nft = useNFTContract();
+  const market = useMarketContract();
+  const nft = useNFTContract(false);
 
   const { data, mutate } = useSWR<MyNFT[] | undefined>(
     { key: "fetchMyNFTs", market, nft },

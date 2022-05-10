@@ -23,7 +23,7 @@ const config: HardhatUserConfig = {
       chainId: 1337,
     },
     rinkeby: {
-      url: `https://rinkeby.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
+      url: `https://eth-rinkeby.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`,
       accounts,
     },
     mainnet: {

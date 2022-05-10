@@ -1,9 +1,9 @@
 import { ChainId } from "../config/chain-id";
 
 export const MARKET_ADDRESS = {
-  [ChainId.RINKEBY]: "0xfC7F1e6D0028BCFFA686f7b6031E73d09FD18629",
+  [ChainId.RINKEBY]: "0xA592D0bECA9281da6F96e0638B53D6BbaB085A2E",
 };
 
 export const NFT_ADDRESS = {
-  [ChainId.RINKEBY]: "0x5E94F34B7acebd5725ce5E6a3BA5755d8fe51730",
+  [ChainId.RINKEBY]: "0x43AD3da42ab78A3Bf363a724Bcb5f1F7a3CD59a8",
 };
