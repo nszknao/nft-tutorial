@@ -19,7 +19,7 @@
     "rinkeby:verify": "yarn run verify:cmd --network rinkeby"
   },
   "dependencies": {
-    "@openzeppelin/contracts": "4.4.0",
+    "@openzeppelin/contracts": "4.6.0",
     "dotenv": "10.0.0"
   },
   "devDependencies": {
