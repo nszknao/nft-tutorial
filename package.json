@@ -36,6 +36,6 @@
     }
   },
   "devDependencies": {
-    "turbo": "1.0.13"
+    "turbo": "1.2.8"
   }
 }
