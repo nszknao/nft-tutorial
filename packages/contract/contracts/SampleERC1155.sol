@@ -10,9 +10,14 @@ contract SampleERC1155 is ERC1155, ERC2981, Ownable {
     mapping(uint256 => uint256) limitAmounts;
     mapping(uint256 => uint256) amountMinted;
 
+    string public name = "SampleERC1155";
+    string public symbol = "SampleERC1155";
+
     constructor()
-        ERC1155("https://gateway.pinata.cloud/ipfs/QmcjgyPPMrxvVt8DNnLUGf8dpxz5ETAj8YKcHL8VaKNF2J/{id}.jpeg")
-    {}
+        ERC1155("")
+    {
+        _setURI("https://gateway.pinata.cloud/ipfs/QmcjgyPPMrxvVt8DNnLUGf8dpxz5ETAj8YKcHL8VaKNF2J/{id}.jpeg");
+    }
 
     function mint(uint256 tokenId, uint256 amount) external payable {
         require(amount >= 1, "You have to mint at least 1 or more at a time");
