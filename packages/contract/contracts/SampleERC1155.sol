@@ -10,7 +10,7 @@ contract SampleERC1155 is ERC1155, ERC2981, Ownable {
     mapping(uint256 => uint256) limitAmounts;
     mapping(uint256 => uint256) amountMinted;
 
-    constructor() public ERC1155("") {}
+    constructor() ERC1155("ipfs://QmQqMF7izNAaU9CY3qV9ZGs4Aksv6ywjx8261khgzQbReW") {}
 
     function mint(uint256 tokenId, uint256 amount) external payable {
         require(amount >= 1, "You have to mint at least 1 or more at a time");
