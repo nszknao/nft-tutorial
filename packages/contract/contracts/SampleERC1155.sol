@@ -10,7 +10,9 @@ contract SampleERC1155 is ERC1155, ERC2981, Ownable {
     mapping(uint256 => uint256) limitAmounts;
     mapping(uint256 => uint256) amountMinted;
 
-    constructor() ERC1155("ipfs://QmQqMF7izNAaU9CY3qV9ZGs4Aksv6ywjx8261khgzQbReW/{id}") {}
+    constructor()
+        ERC1155("https://gateway.pinata.cloud/ipfs/QmcjgyPPMrxvVt8DNnLUGf8dpxz5ETAj8YKcHL8VaKNF2J/{id}.jpeg")
+    {}
 
     function mint(uint256 tokenId, uint256 amount) external payable {
         require(amount >= 1, "You have to mint at least 1 or more at a time");
@@ -34,9 +36,9 @@ contract SampleERC1155 is ERC1155, ERC2981, Ownable {
         limitAmounts[tokenId] = limitAmount;
     }
 
-    // function exists(uint256 tokenId) internal view returns (bool) {
-    //     return _owners[tokenId] != address(0);
-    // }
+    function setURI(string memory uri) external onlyOwner {
+        _setURI(uri);
+    }
 
     function supportsInterface(bytes4 interfaceId)
         public

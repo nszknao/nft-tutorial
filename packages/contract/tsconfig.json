@@ -13,12 +13,7 @@
     "outDir": "./dist",
     "rootDirs": ["./scripts", "./tests", "./typechain"],
   },
-  "extends": "../../tsconfig.base.json",
-  "exclude": ["**/node_modules"],
+  "exclude": ["dist", "node_modules"],
   "files": ["./hardhat.config.ts"],
-  "include": [
-    "./scripts",
-    "./tests",
-    "./typechain"
-  ]
+  "include": ["./scripts", "./deploy", "./tasks", "./tests", "./typechain"]
 }

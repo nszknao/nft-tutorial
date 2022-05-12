@@ -1,7 +1,5 @@
 import dotenv from "dotenv";
 
-import "tsconfig-paths/lib/register";
-
 import { HardhatUserConfig } from "hardhat/types";
 import "@nomiclabs/hardhat-ethers";
 import "@nomiclabs/hardhat-etherscan";
