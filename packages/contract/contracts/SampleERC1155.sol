@@ -10,7 +10,7 @@ contract SampleERC1155 is ERC1155, ERC2981, Ownable {
     mapping(uint256 => uint256) limitAmounts;
     mapping(uint256 => uint256) amountMinted;
 
-    constructor() ERC1155("ipfs://QmQqMF7izNAaU9CY3qV9ZGs4Aksv6ywjx8261khgzQbReW") {}
+    constructor() ERC1155("ipfs://QmQqMF7izNAaU9CY3qV9ZGs4Aksv6ywjx8261khgzQbReW/{id}") {}
 
     function mint(uint256 tokenId, uint256 amount) external payable {
         require(amount >= 1, "You have to mint at least 1 or more at a time");
@@ -33,6 +33,10 @@ contract SampleERC1155 is ERC1155, ERC2981, Ownable {
         prices[tokenId] = price;
         limitAmounts[tokenId] = limitAmount;
     }
+
+    // function exists(uint256 tokenId) internal view returns (bool) {
+    //     return _owners[tokenId] != address(0);
+    // }
 
     function supportsInterface(bytes4 interfaceId)
         public

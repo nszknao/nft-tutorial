@@ -29,11 +29,13 @@ describe("SampleERC1155", () => {
 
     await nft.register(1, 0, 100);
     await nft.connect(creator).mint(1, 1);
+    expect(await nft.balanceOf(creator.address, 1)).to.equal(1);
 
     await nft.register(2, utils.parseEther("0.02"), 200);
     await nft.connect(creator).mint(2, 3, { value: utils.parseEther("0.06") });
-
-    expect(await nft.balanceOf(creator.address, 1)).to.equal(1);
     expect(await nft.balanceOf(creator.address, 2)).to.equal(3);
+
+    const uri = await nft.uri(1);
+    console.log(uri);
   });
 });
