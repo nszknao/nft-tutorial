@@ -12,30 +12,7 @@
     "build": "turbo run build",
     "test": "turbo run test"
   },
-  "turbo": {
-    "baseBranch": "origin/main",
-    "pipeline": {
-      "build": {
-        "dependsOn": [
-          "^build"
-        ],
-        "outputs": [
-          ".next/**",
-          "artifacts/**",
-          "typechain/**"
-        ]
-      },
-      "web#build": {
-        "dependsOn": ["contract#build"]
-      },
-      "test": {
-        "dependsOn": [
-          "build"
-        ]
-      }
-    }
-  },
   "devDependencies": {
-    "turbo": "1.0.4"
+    "turbo": "1.2.8"
   }
 }

@@ -1,9 +1,8 @@
 import { Flex, Heading, Image } from "@chakra-ui/react";
-import { Web3Provider } from "@ethersproject/providers";
-import { useWeb3React } from "@web3-react/core";
-import React, { VFC } from "react";
+import { ConnectButton } from "@rainbow-me/rainbowkit";
+import React, { FC } from "react";
 import useSWR from "swr";
-import { ConnectWallet } from "../components/connect-wallet";
+import { useAccount } from "wagmi";
 
 type OpenSeaAsset = {
   asset_contract: {
@@ -37,7 +36,7 @@ type Props = {
   account: string;
 };
 
-const Contents: VFC<Props> = ({ account }) => {
+const Contents: FC<Props> = ({ account }) => {
   const { data } = useSWR<{ assets: OpenSeaAsset[] }>(
     ["/assets", { owner: account }],
     fetcher
@@ -61,8 +60,8 @@ const Contents: VFC<Props> = ({ account }) => {
   );
 };
 
-export const NFT: VFC = () => {
-  const { account, library } = useWeb3React<Web3Provider>();
+export const NFT: FC = () => {
+  const { data } = useAccount();
 
   return (
     <>
@@ -77,8 +76,10 @@ export const NFT: VFC = () => {
         <Heading as="h1" size="md" letterSpacing="tighter">
           View NFTs
         </Heading>
-        <ConnectWallet />
-        <button
+
+        <ConnectButton />
+
+        {/* <button
           onClick={async () => {
             const signer = await library?.provider.request?.({
               method: "eth_sign",
@@ -88,10 +89,10 @@ export const NFT: VFC = () => {
           }}
         >
           getSigners()
-        </button>
+        </button> */}
       </Flex>
 
-      {account != null && <Contents account={account} />}
+      {data?.address && <Contents account={data.address} />}
     </>
   );
 };

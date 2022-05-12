@@ -2,9 +2,12 @@ import dotenv from "dotenv";
 
 import "tsconfig-paths/lib/register";
 
+import { HardhatUserConfig } from "hardhat/types";
 import "@nomiclabs/hardhat-ethers";
+import "@nomiclabs/hardhat-etherscan";
 import "@nomiclabs/hardhat-waffle";
 import "@typechain/hardhat";
+import "hardhat-deploy";
 
 dotenv.config();
 
@@ -13,42 +16,60 @@ const accounts =
     ? [process.env.WALLET_PRIVATE_KEY]
     : [];
 
-/**
- * @type import('hardhat/config').HardhatUserConfig
- */
-module.exports = {
-  defaultNetwork: "hardhat",
-  networks: {
-    hardhat: {
-      chainId: 1337,
-    },
-    rinkeby: {
-      url: `https://rinkeby.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
-      accounts,
-    },
-    mainnet: {
-      url: `https://mainnet.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
-      accounts,
-    },
-  },
+const config: HardhatUserConfig = {
   solidity: {
-    version: "0.8.4",
+    version: "0.8.9",
     settings: {
       optimizer: {
         enabled: true,
-        runs: 200,
       },
     },
   },
+  defaultNetwork: "hardhat",
+  namedAccounts: {
+    deployer: {
+      default: 0,
+    },
+  },
+  networks: {
+    localhost: {
+      live: false,
+      saveDeployments: true,
+      tags: ["local"],
+    },
+    hardhat: {
+      live: false,
+      tags: ["test", "local"],
+    },
+    rinkeby: {
+      accounts,
+      saveDeployments: true,
+      tags: ["staging"],
+      url: `https://eth-rinkeby.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`,
+    },
+    mainnet: {
+      accounts,
+      saveDeployments: true,
+      url: `https://mainnet.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
+    },
+  },
   paths: {
-    sources: "./contracts",
-    artifacts: "./artifacts",
-    cache: "./cache",
-    tests: "./tests",
+    artifacts: "artifacts",
+    cache: "cache",
+    deploy: "deploy",
+    deployments: "deployments",
+    imports: "imports",
+    sources: "contracts",
+    tests: "tests",
   },
   typechain: {
     outDir: "typechain",
     target: "ethers-v5",
     alwaysGenerateOverloads: false,
   },
+  etherscan: {
+    apiKey: process.env.ETHERSCAN_API_KEY,
+  },
 };
+
+export default config;
