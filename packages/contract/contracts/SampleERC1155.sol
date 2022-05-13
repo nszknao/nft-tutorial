@@ -6,39 +6,44 @@ import "@openzeppelin/contracts/token/common/ERC2981.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 contract SampleERC1155 is ERC1155, ERC2981, Ownable {
-    mapping(uint256 => uint256) prices;
-    mapping(uint256 => uint256) limitAmounts;
-    mapping(uint256 => uint256) amountMinted;
+    mapping(uint256 => Item) items;
 
-    string public name = "SampleERC1155";
-    string public symbol = "SampleERC1155";
+    string public name;
+    string public symbol;
 
-    constructor()
-        ERC1155("")
-    {
-        _setURI("https://gateway.pinata.cloud/ipfs/QmcjgyPPMrxvVt8DNnLUGf8dpxz5ETAj8YKcHL8VaKNF2J/{id}.jpeg");
+    struct Item {
+        uint256 price;
+        uint256 limitAmount;
+        uint256 mintedAmount;
+    }
+
+    constructor() ERC1155("") {
+        name = "SampleERC1155";
+        symbol = "SERC1155";
     }
 
     function mint(uint256 tokenId, uint256 amount) external payable {
         require(amount >= 1, "You have to mint at least 1 or more at a time");
+        require(_exists(tokenId), "Invalid input");
 
+        Item memory item = items[tokenId];
         require(
-            amountMinted[tokenId] + amount <= limitAmounts[tokenId],
+            item.mintedAmount + amount <= item.limitAmount,
             "Limit reached"
         );
-        require(msg.value >= prices[tokenId] * amount, "Not enough money");
+        require(msg.value >= item.price * amount, "Not enough money");
 
-        amountMinted[tokenId] += amount;
+        item.mintedAmount += amount;
         _mint(msg.sender, tokenId, amount, "");
     }
 
-    function register(
-        uint256 tokenId,
-        uint256 price,
-        uint256 limitAmount
-    ) external onlyOwner {
-        prices[tokenId] = price;
-        limitAmounts[tokenId] = limitAmount;
+    function setItem(uint256 tokenId, uint256 price, uint256 limitAmount) external onlyOwner {
+        require(!_exists(tokenId), "Invalid input");
+        items[tokenId] = Item(price, limitAmount, 0);
+    }
+
+    function _exists(uint256 tokenId) internal view returns (bool) {
+        return items[tokenId].limitAmount != 0;
     }
 
     function setURI(string memory uri) external onlyOwner {
