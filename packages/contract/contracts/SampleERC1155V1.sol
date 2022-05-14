@@ -1,11 +1,15 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-import "@openzeppelin/contracts/token/common/ERC2981.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/token/ERC1155/ERC1155.sol";
+import "@openzeppelin/contracts-upgradeable/token/common/ERC2981Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol";
 
-contract SampleERC1155 is ERC1155, ERC2981, Ownable {
+contract SampleERC1155V1 is
+    ERC1155Upgradeable,
+    ERC2981Upgradeable,
+    OwnableUpgradeable
+{
     mapping(uint256 => Item) items;
 
     string public name;
@@ -17,9 +21,12 @@ contract SampleERC1155 is ERC1155, ERC2981, Ownable {
         uint256 mintedAmount;
     }
 
-    constructor() ERC1155("") {
+    function initialize() public initializer {
         name = "SampleERC1155";
         symbol = "SERC1155";
+        __ERC1155_init("");
+        __Ownable_init();
+        __ERC2981_init();
     }
 
     function mint(uint256 tokenId, uint256 amount) external payable {
@@ -58,7 +65,7 @@ contract SampleERC1155 is ERC1155, ERC2981, Ownable {
         public
         view
         virtual
-        override(ERC1155, ERC2981)
+        override(ERC1155Upgradeable, ERC2981Upgradeable)
         returns (bool)
     {
         return super.supportsInterface(interfaceId);

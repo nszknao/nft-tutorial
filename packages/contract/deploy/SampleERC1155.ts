@@ -12,10 +12,7 @@ const deploy: DeployFunction = async ({
     args: [],
     from: deployer,
     log: true,
-    // proxy: {
-    //   proxyContract: "OpenZeppelinTransparentProxy",
-    //   viaAdminContract: "DefaultProxyAdmin",
-    // },
+    proxy: true,
   });
 };
 

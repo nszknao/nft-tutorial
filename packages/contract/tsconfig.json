@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "ES2017",
+    "target": "ES2018",
     "module": "CommonJS",
     "declaration": true,
     "declarationMap": true,
@@ -9,8 +9,9 @@
     "strict": true,
     "resolveJsonModule": true,
     "moduleResolution": "Node",
-    "isolatedModules": true,
+    "isolatedModules": false,
     "outDir": "./dist",
+    "noImplicitAny": false,
     "rootDirs": ["./scripts", "./tests", "./typechain"],
   },
   "exclude": ["dist", "node_modules"],
