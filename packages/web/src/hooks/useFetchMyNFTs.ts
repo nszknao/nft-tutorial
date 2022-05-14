@@ -1,4 +1,4 @@
-import { KBMarket, NFT } from "@/typechain/index";
+import { KBMarket, SampleERC721 } from "@/typechain/index";
 import { formatUnits } from "@ethersproject/units";
 import useSWR from "swr";
 import { useMarketContract, useNFTContract } from "./useContract";
@@ -13,7 +13,7 @@ type MyNFT = {
   description: string;
 };
 
-const fetcher = async (market: KBMarket, nft: NFT) => {
+const fetcher = async (market: KBMarket, nft: SampleERC721) => {
   const data = await market.fetchMyNFTs();
 
   const items = await Promise.all(

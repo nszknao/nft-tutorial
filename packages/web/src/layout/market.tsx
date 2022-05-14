@@ -21,9 +21,6 @@ export const MarketLayout: FC<Props> = ({ children }) => {
           <Link href="/market">
             <a>Main Marketplace</a>
           </Link>
-          <Link href="/market/mint-item">
-            <a>Mint Tokens</a>
-          </Link>
           <Link href="/market/my-nft">
             <a>My NFT</a>
           </Link>
