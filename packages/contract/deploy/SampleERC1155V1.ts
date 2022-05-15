@@ -8,13 +8,16 @@ const deploy: DeployFunction = async ({
   const { deploy } = deployments;
   const { deployer } = await getNamedAccounts();
 
-  // await deploy("SampleERC1155", {
-  //   args: [],
-  //   from: deployer,
-  //   log: true,
-  // });
+  await deploy("SampleERC1155V1", {
+    args: [],
+    from: deployer,
+    log: true,
+    proxy: {
+      proxyContract: "OpenZeppelinTransparentProxy",
+    },
+  });
 };
 
-deploy.tags = ["SampleERC1155"];
+deploy.tags = ["SampleERC1155V1"];
 
 export default deploy;

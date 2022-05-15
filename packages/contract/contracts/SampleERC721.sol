@@ -1,18 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.9;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 
-contract SampleERC721 is ERC721 {
+contract SampleERC721 is ERC721Enumerable {
     uint256 private _currentTokenId;
 
     constructor() ERC721("SampleERC721", "SampleERC721") {}
 
-    function mintToken() public returns (uint256) {
-        uint256 tokenId = _currentTokenId;
-        _mint(msg.sender, tokenId);
+    /**
+     * @notice Mints a single NFT
+     */
+    function mint() public {
+        uint256 newId = _currentTokenId;
+        _safeMint(msg.sender, newId);
         _currentTokenId++;
-        return tokenId;
     }
 }

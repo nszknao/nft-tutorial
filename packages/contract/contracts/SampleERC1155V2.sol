@@ -4,12 +4,15 @@ pragma solidity ^0.8.9;
 import "@openzeppelin/contracts-upgradeable/token/common/ERC2981Upgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/access/OwnableUpgradeable.sol";
 import "@openzeppelin/contracts-upgradeable/token/ERC1155/ERC1155Upgradeable.sol";
+import "@openzeppelin/contracts-upgradeable/token/ERC721/extensions/IERC721EnumerableUpgradeable.sol";
 
-contract SampleERC1155V1 is
+contract SampleERC1155V2 is
     ERC1155Upgradeable,
     ERC2981Upgradeable,
     OwnableUpgradeable
 {
+    // SampleERC1155V1に加えて、クエスト用を追加する
+
     // NFT name
     string public name;
 
