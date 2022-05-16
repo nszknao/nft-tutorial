@@ -7,6 +7,7 @@ import "@nomiclabs/hardhat-waffle";
 import "@openzeppelin/hardhat-upgrades";
 import "@typechain/hardhat";
 import "hardhat-deploy";
+import "hardhat-gas-reporter";
 
 dotenv.config();
 
@@ -68,6 +69,11 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
+  },
+  gasReporter: {
+    coinmarketcap: process.env.COINMARKETCAP_API_KEY,
+    currency: "USD",
+    enabled: process.env.REPORT_GAS !== undefined,
   },
 };
 
