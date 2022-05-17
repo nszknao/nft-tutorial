@@ -41,7 +41,7 @@
     "dotenv": "16.0.1",
     "ethereum-waffle": "3.4.4",
     "hardhat": "2.9.5",
-    "hardhat-deploy": "0.11.4",
+    "hardhat-deploy": "0.11.5",
     "hardhat-gas-reporter": "^1.0.8",
     "ts-node": "10.7.0",
     "typechain": "8.0.0",
