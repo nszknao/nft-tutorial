@@ -44,7 +44,6 @@ contract SampleERC1155V1 is
      * @notice Mints a desired quantity of a single NFT ID
      */
     function mint(uint256 id, uint256 quantity) external payable {
-        require(quantity >= 1, "You have to mint at least 1 or more at a time");
         require(exists[id], "ID does not exist");
 
         require(

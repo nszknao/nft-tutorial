@@ -11,8 +11,6 @@ contract SampleERC1155V2 is
     ERC2981Upgradeable,
     OwnableUpgradeable
 {
-    // SampleERC1155V1に加えて、クエスト用を追加する
-
     // NFT name
     string public name;
 
@@ -31,6 +29,11 @@ contract SampleERC1155V2 is
     // Mapping from token ID to token quantity
     mapping(uint256 => uint256) public maxTokenSupply;
 
+    // Mapping from token ID to required quantity
+    mapping(uint256 => uint256) public required;
+
+    address private _sampleTokenAddress;
+
     function initialize(
         string memory _name,
         string memory _symbol,
@@ -47,8 +50,14 @@ contract SampleERC1155V2 is
      * @notice Mints a desired quantity of a single NFT ID
      */
     function mint(uint256 id, uint256 quantity) external payable {
-        require(quantity >= 1, "You have to mint at least 1 or more at a time");
         require(exists[id], "ID does not exist");
+
+        if (required[id] > 0) {
+            IERC721EnumerableUpgradeable sampleToken = IERC721EnumerableUpgradeable(
+                    _sampleTokenAddress
+                );
+            sampleToken.tokenOfOwnerByIndex(msg.sender, required[id] - 1);
+        }
 
         require(
             tokenSupply[id] + quantity <= maxTokenSupply[id],
@@ -89,7 +98,8 @@ contract SampleERC1155V2 is
     function add(
         uint256[] calldata ids,
         uint256[] calldata _prices,
-        uint256[] calldata _maxSupply
+        uint256[] calldata _maxSupply,
+        uint256[] calldata _required
     ) external onlyOwner {
         require(
             ids.length == _prices.length && ids.length == _maxSupply.length,
@@ -104,6 +114,7 @@ contract SampleERC1155V2 is
             exists[newId] = true;
             prices[newId] = _prices[i];
             maxTokenSupply[newId] = _maxSupply[i];
+            required[newId] = _required[i];
         }
     }
 
@@ -198,5 +209,9 @@ contract SampleERC1155V2 is
         for (uint256 i = 0; i < ids.length; i++) {
             tokenSupply[ids[i]] += amounts[i];
         }
+    }
+
+    function setSampleToken(address _address) external onlyOwner {
+        _sampleTokenAddress = _address;
     }
 }
