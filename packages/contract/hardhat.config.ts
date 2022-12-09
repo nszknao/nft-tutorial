@@ -1,20 +1,24 @@
 import dotenv from "dotenv";
+dotenv.config();
 
 import { HardhatUserConfig } from "hardhat/types";
 import "@nomiclabs/hardhat-ethers";
 import "@nomiclabs/hardhat-etherscan";
-import "@nomiclabs/hardhat-waffle";
 import "@openzeppelin/hardhat-upgrades";
 import "@typechain/hardhat";
-import "hardhat-deploy";
 import "hardhat-gas-reporter";
+import "hardhat-preprocessor";
+import fs from "fs";
 
-dotenv.config();
+import "./tasks";
 
-const accounts =
-  process.env.WALLET_PRIVATE_KEY !== undefined
-    ? [process.env.WALLET_PRIVATE_KEY]
-    : [];
+function getRemappings() {
+  return fs
+    .readFileSync("remappings.txt", "utf8")
+    .split("\n")
+    .filter(Boolean) // remove empty lines
+    .map((line) => line.trim().split("="));
+}
 
 const config: HardhatUserConfig = {
   solidity: {
@@ -26,41 +30,35 @@ const config: HardhatUserConfig = {
     },
   },
   defaultNetwork: "hardhat",
-  namedAccounts: {
-    deployer: {
-      default: 0,
+  networks: {
+    hardhat: {
+      initialBaseFeePerGas: 0,
+    },
+    goerli: {
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+      url: `https://eth-goerli.g.alchemy.com/v2/${process.env.ALCHEMY_API_KEY}`,
     },
   },
-  networks: {
-    localhost: {
-      live: false,
-      saveDeployments: true,
-      tags: ["local"],
-    },
-    hardhat: {
-      live: false,
-      tags: ["test", "local"],
-    },
-    rinkeby: {
-      accounts,
-      saveDeployments: true,
-      tags: ["staging"],
-      url: `https://eth-rinkeby.alchemyapi.io/v2/${process.env.ALCHEMY_API_KEY}`,
-    },
-    mainnet: {
-      accounts,
-      saveDeployments: true,
-      url: `https://mainnet.infura.io/v3/${process.env.INFURA_PROJECT_ID}`,
-    },
+  preprocess: {
+    eachLine: () => ({
+      transform: (line: string) => {
+        if (line.match(/^\s*import /i)) {
+          for (const [from, to] of getRemappings()) {
+            if (line.includes(from)) {
+              line = line.replace(from, to);
+              break;
+            }
+          }
+        }
+        return line;
+      },
+    }),
   },
   paths: {
     artifacts: "artifacts",
     cache: "cache",
-    deploy: "deploy",
-    deployments: "deployments",
-    imports: "imports",
     sources: "contracts",
-    tests: "tests",
+    tests: "test",
   },
   typechain: {
     outDir: "typechain",
