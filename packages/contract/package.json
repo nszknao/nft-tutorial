@@ -29,7 +29,7 @@
     "@types/chai": "4.3.4",
     "@types/chai-as-promised": "^7.1.5",
     "@types/mocha": "9.1.1",
-    "@types/node": "16.18.3",
+    "@types/node": "16.18.8",
     "chai": "4.3.7",
     "chai-as-promised": "7.1.1",
     "dotenv": "16.0.3",
