@@ -13,7 +13,7 @@
     "@emotion/react": "11.9.0",
     "@emotion/styled": "11.8.1",
     "@ethersproject/constants": "5.6.1",
-    "@ethersproject/contracts": "5.6.2",
+    "@ethersproject/contracts": "5.7.0",
     "@ethersproject/providers": "5.6.8",
     "@ethersproject/units": "5.6.1",
     "@rainbow-me/rainbowkit": "0.1.2",
