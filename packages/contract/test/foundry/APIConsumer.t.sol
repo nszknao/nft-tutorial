@@ -13,10 +13,4 @@ contract APIConsumerTest is Test {
 
         consumer = new APIConsumer();
     }
-
-    function testGetLatestPrice() public {
-        bytes32 requestId = consumer.requestVolumeData();
-        console.logBytes32(requestId);
-        // consumer.fulfill(requestId);
-    }
 }

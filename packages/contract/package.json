@@ -9,8 +9,9 @@
     "dev": "hardhat run-local",
     "prebuild": "yarn hardhat clean",
     "build": "yarn hardhat compile",
-    "test": "hardhat test",
-    "test:foundry": "forge test",
+    "test": "yarn test:foundry",
+    "test:hardhat": "hardhat test",
+    "test:foundry": "forge test --fork-url https://ethereum-goerli-rpc.allthatnode.com",
     "node": "hardhat node --hostname 0.0.0.0",
     "verify:cmd": "hardhat verify",
     "verify:goerli": "hardhat verify --network goerli"
