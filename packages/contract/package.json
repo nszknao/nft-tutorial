@@ -10,7 +10,6 @@
     "prebuild": "yarn hardhat clean",
     "build": "yarn hardhat compile",
     "test": "hardhat test",
-    "test:gas": "REPORT_GAS=true hardhat test",
     "test:foundry": "forge test",
     "node": "hardhat node --hostname 0.0.0.0",
     "verify:cmd": "hardhat verify",
@@ -19,6 +18,7 @@
     "verify:rinkeby": "hardhat verify --network rinkeby"
   },
   "dependencies": {
+    "@chainlink/contracts": "0.5.1",
     "@openzeppelin/contracts": "4.6.0",
     "@openzeppelin/contracts-upgradeable": "^4.6.0"
   },
@@ -37,7 +37,6 @@
     "dotenv": "16.0.3",
     "ethereum-waffle": "3.4.4",
     "hardhat": "2.9.9",
-    "hardhat-gas-reporter": "^1.0.8",
     "hardhat-preprocessor": "0.1.5",
     "ts-node": "10.9.1",
     "typechain": "8.0.0",

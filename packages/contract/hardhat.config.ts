@@ -6,7 +6,6 @@ import "@nomiclabs/hardhat-ethers";
 import "@nomiclabs/hardhat-etherscan";
 import "@openzeppelin/hardhat-upgrades";
 import "@typechain/hardhat";
-import "hardhat-gas-reporter";
 import "hardhat-preprocessor";
 import fs from "fs";
 
@@ -67,11 +66,6 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: process.env.ETHERSCAN_API_KEY,
-  },
-  gasReporter: {
-    coinmarketcap: process.env.COINMARKETCAP_API_KEY,
-    currency: "USD",
-    enabled: process.env.REPORT_GAS !== undefined,
   },
 };
 
