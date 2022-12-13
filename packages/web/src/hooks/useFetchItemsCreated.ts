@@ -1,5 +1,5 @@
 import { KBMarket, SampleERC721 } from "@/typechain/index";
-import { formatUnits } from "@ethersproject/units";
+import { utils } from "ethers";
 import useSWR from "swr";
 import { useMarketContract, useNFTContract } from "./useContract";
 
@@ -12,7 +12,7 @@ const fetcher = async (market: KBMarket, nft: SampleERC721) => {
       const res = await fetch(tokenUri);
       const meta = await res.json();
       return {
-        price: formatUnits(item.price.toString(), "ether"),
+        price: utils.formatUnits(item.price.toString(), "ether"),
         tokenId: item.tokenId.toNumber(),
         seller: item.seller,
         owner: item.owner,
