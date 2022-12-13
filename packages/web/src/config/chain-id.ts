@@ -1,4 +1,4 @@
-import { valueof } from "../functions/type";
+import { valueof } from "../lib/type";
 
 export const ChainId = {
   // ETHEREUM: 1,
