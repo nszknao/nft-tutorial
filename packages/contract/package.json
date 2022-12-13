@@ -6,10 +6,12 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "dev": "hardhat run-local",
     "prebuild": "yarn hardhat clean",
     "build": "yarn hardhat compile",
     "test": "hardhat test",
     "test:gas": "REPORT_GAS=true hardhat test",
+    "test:foundry": "forge test",
     "node": "hardhat node --hostname 0.0.0.0",
     "verify:cmd": "hardhat verify",
     "verify": "yarn run verify:mainnet",
