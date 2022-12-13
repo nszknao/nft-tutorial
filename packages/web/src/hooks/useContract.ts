@@ -1,18 +1,16 @@
-import {
-  KBMarket__factory,
-  KBMarket,
-  SampleERC721__factory,
-  SampleERC721,
-} from "@/typechain/index";
 import { useContract, useSigner } from "wagmi";
-import { chainId } from "../config/chain-id";
-import { MARKET_ADDRESS, NFT_ADDRESS } from "../constants/addresses";
+import {
+  KB_MARKET_ABI,
+  KB_MARKET_ADDRESS,
+  SAMPLE_ERC721_ABI,
+  SAMPLE_ERC721_ADDRESS,
+} from "../constants/abis";
 
 export const useMarketContract = (withSignerIfPossible = true) => {
   const { data: signer } = useSigner();
-  const contract = useContract<KBMarket>({
-    addressOrName: MARKET_ADDRESS[chainId],
-    contractInterface: KBMarket__factory.abi,
+  const contract = useContract({
+    abi: KB_MARKET_ABI,
+    address: KB_MARKET_ADDRESS,
     signerOrProvider: withSignerIfPossible && signer ? signer : undefined,
   });
   return contract;
@@ -20,9 +18,9 @@ export const useMarketContract = (withSignerIfPossible = true) => {
 
 export const useNFTContract = (withSignerIfPossible = true) => {
   const { data: signer } = useSigner();
-  const contract = useContract<SampleERC721>({
-    addressOrName: NFT_ADDRESS[chainId],
-    contractInterface: SampleERC721__factory.abi,
+  const contract = useContract({
+    abi: SAMPLE_ERC721_ABI,
+    address: SAMPLE_ERC721_ADDRESS,
     signerOrProvider: withSignerIfPossible && signer ? signer : undefined,
   });
   return contract;

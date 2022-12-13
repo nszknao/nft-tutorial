@@ -6,7 +6,7 @@ import { FC } from "react";
 import { useAssets } from "@/web/lib/opensea";
 
 const NFTPage: NextPage = () => {
-  const { data } = useAccount();
+  const { address } = useAccount();
 
   return (
     <>
@@ -37,7 +37,7 @@ const NFTPage: NextPage = () => {
         </button> */}
       </Flex>
 
-      {data?.address && <Contents account={data.address} />}
+      {address && <Contents account={address} />}
     </>
   );
 };

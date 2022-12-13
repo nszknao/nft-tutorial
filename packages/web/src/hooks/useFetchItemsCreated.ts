@@ -1,10 +1,12 @@
-import { KBMarket, SampleERC721 } from "@/typechain/index";
 import { utils } from "ethers";
 import useSWR from "swr";
 import { useMarketContract, useNFTContract } from "./useContract";
 
-const fetcher = async (market: KBMarket, nft: SampleERC721) => {
-  const data = await market.fetchItemsCreated();
+const fetcher = async (
+  market: NonNullable<ReturnType<typeof useMarketContract>>,
+  nft: NonNullable<ReturnType<typeof useNFTContract>>
+) => {
+  const data = await market?.fetchItemsCreated();
 
   const items = await Promise.all(
     data.map(async (item) => {
@@ -33,7 +35,7 @@ export const useFetchItemsCreated = () => {
 
   const { data, mutate } = useSWR(
     { key: "fetchItemsCreated", market, nft },
-    ({ market, nft }) => fetcher(market, nft)
+    ({ market, nft }) => fetcher(market!, nft!)
   );
 
   return { data, mutate };
