@@ -2,22 +2,14 @@
   "baseBranch": "origin/main",
   "pipeline": {
     "build": {
-      "dependsOn": [
-        "^build"
-      ],
-      "outputs": [
-        ".next/**",
-        "artifacts/**",
-        "typechain/**"
-      ]
+      "dependsOn": ["^build"],
+      "outputs": [".next/**", "artifacts/**", "typechain/**"]
     },
-    "web#build": {
-      "dependsOn": ["contract#build"]
+    "dev": {
+      "cache": false
     },
     "test": {
-      "dependsOn": [
-        "build"
-      ]
+      "dependsOn": ["build"]
     }
   }
 }
