@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy-contract:
+  unit-test:
     timeout-minutes: 30
     strategy:
       matrix:
@@ -19,7 +19,14 @@ jobs:
 
     steps:
       - uses: actions/checkout@v3
-      
+        with:
+            submodules: recursive
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+        with:
+          version: nightly
+
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v3
         with:
