@@ -1,4 +1,4 @@
-import { chainId } from "@/web/config/chain-id";
+import { chainId } from "src/config/chain-id";
 import { goerli, hardhat, polygonMumbai } from "wagmi/chains";
 
 const SAMPLE_ERC721_ABI = [
