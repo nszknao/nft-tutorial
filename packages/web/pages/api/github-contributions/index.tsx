@@ -41,7 +41,7 @@ const rle = (u8Array: Uint8Array) => {
   return new Uint8Array(result);
 };
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { username } = req.query;
+  const { username, tokenId } = req.query;
 
   if (!username) {
     return new Response(`Invalid Parameter`, { status: 400 });
@@ -95,42 +95,8 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   }
   return res.status(200).send({
     image: abiCoder.encode(["bytes"], [ethers.utils.hexlify(ret)]),
-    username,
+    tokenId,
   });
-
-  // return new ImageResponse(
-  //   (
-  //     <div tw="flex w-full h-full relative">
-  //       <div tw="flex items-center w-full h-full">
-  //         {user.contributionsCollection.contributionCalendar.weeks.map(
-  //           (week, index) => (
-  //             <div
-  //               key={index}
-  //               tw="flex flex-col justify-start"
-  //               style={{ height: `${size * 7}px` }}
-  //             >
-  //               {week.contributionDays.map((day) => (
-  //                 <div
-  //                   key={day.weekday}
-  //                   tw="flex flex-shrink-0"
-  //                   style={{
-  //                     background: day.color,
-  //                     width: `${size}px`,
-  //                     height: `${size}px`,
-  //                   }}
-  //                 />
-  //               ))}
-  //             </div>
-  //           )
-  //         )}
-  //       </div>
-  //     </div>
-  //   ),
-  //   {
-  //     width,
-  //     height,
-  //   }
-  // );
 };
 
 export default handler;

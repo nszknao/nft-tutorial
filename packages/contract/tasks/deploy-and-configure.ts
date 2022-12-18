@@ -41,7 +41,7 @@ interface ContractRow {
 }
 
 task("deploy-and-configure", "Deploy and configure all contracts").setAction(
-  async (args, { run }) => {
+  async (args, { run, ethers }) => {
     // Deploy the OPTTAG contracts and return deployment information
     const contracts = await run("deploy", args);
 
@@ -50,13 +50,14 @@ task("deploy-and-configure", "Deploy and configure all contracts").setAction(
     //   contracts,
     // });
 
+    const [deployer] = await ethers.getSigners();
+
     for (let i = 0; i < 5; i++) {
-      const tx =
-        await contracts.GitHubContributionDescriptor.instance.addManyColorsToPalette(
-          i,
-          themes[i]
-        );
-      await tx.await();
+      console.log(`Adding palette ${i}...`);
+      const tx = await contracts.GitHubContributionDescriptor.instance
+        .connect(deployer)
+        .addManyColorsToPalette(i, themes[i]);
+      await tx.wait();
     }
 
     console.table(

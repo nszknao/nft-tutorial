@@ -19,9 +19,4 @@ interface IGitHubContributionDescriptor {
         string calldata description,
         bytes calldata image
     ) external view returns (string memory);
-
-    function generateSVGImage(bytes calldata image)
-        external
-        view
-        returns (string memory);
 }

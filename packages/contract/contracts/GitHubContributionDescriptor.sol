@@ -5,7 +5,6 @@ import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 import {IGitHubContributionDescriptor} from "./interfaces/IGitHubContributionDescriptor.sol";
 import {NFTDescriptor} from "./libs/NFTDescriptor.sol";
-import {MultiPartRLEToSVG} from "./libs/MultiPartRLEToSVG.sol";
 
 contract GitHubContributionDescriptor is
     IGitHubContributionDescriptor,
@@ -82,17 +81,6 @@ contract GitHubContributionDescriptor is
             });
 
         return NFTDescriptor.constructTokenURI(params, palettes);
-    }
-
-    function generateSVGImage(bytes calldata image)
-        external
-        view
-        override
-        returns (string memory)
-    {
-        MultiPartRLEToSVG.SVGParams memory params = MultiPartRLEToSVG
-            .SVGParams({parts: _getPartsForSeed(image), background: "d5d7e1"});
-        return NFTDescriptor.generateSVGImage(params, palettes);
     }
 
     function _getPartsForSeed(bytes calldata image)

@@ -4,9 +4,11 @@ pragma solidity ^0.8.17;
 import {ChainlinkClient, Chainlink, LinkTokenInterface} from "@chainlink/contracts/src/v0.8/ChainlinkClient.sol";
 import {ConfirmedOwner} from "@chainlink/contracts/src/v0.8/ConfirmedOwner.sol";
 import {ERC721} from "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import {Strings} from "@openzeppelin/contracts/utils/Strings.sol";
 import {IGitHubContributionDescriptor} from "./interfaces/IGitHubContributionDescriptor.sol";
 
 contract GitHubContributionNFT is ERC721, ChainlinkClient, ConfirmedOwner {
+    using Strings for uint256;
     using Chainlink for Chainlink.Request;
     uint256 public currentTokenId;
 
@@ -15,14 +17,13 @@ contract GitHubContributionNFT is ERC721, ChainlinkClient, ConfirmedOwner {
     bytes32 public jobId;
     uint256 private fee;
 
-    mapping(uint256 => uint8) private _themeIndexById;
     mapping(string => uint256) private _idByUsername;
     mapping(uint256 => string) private _usernamesById;
     mapping(uint256 => bytes) public imagesById;
 
     event RequestFulfilled(
         bytes32 indexed requestId,
-        string username,
+        uint256 tokenId,
         bytes data
     );
 
@@ -30,14 +31,13 @@ contract GitHubContributionNFT is ERC721, ChainlinkClient, ConfirmedOwner {
         address _link,
         address _oracle,
         bytes32 _jobId,
-        uint256 _fee,
         IGitHubContributionDescriptor _descriptor
     ) ConfirmedOwner(msg.sender) ERC721("GitHubContributionNFT", "GHCN") {
         require(_link != address(0));
         setChainlinkToken(_link);
         setChainlinkOracle(_oracle);
         jobId = _jobId;
-        fee = LINK_DIVISIBILITY * _fee;
+        fee = (1 * LINK_DIVISIBILITY) / 10;
         descriptor = _descriptor;
     }
 
@@ -46,7 +46,6 @@ contract GitHubContributionNFT is ERC721, ChainlinkClient, ConfirmedOwner {
         _safeMint(msg.sender, newId);
 
         _idByUsername[username] = newId;
-        _themeIndexById[newId] = 0;
         commitGitHub(newId);
 
         currentTokenId++;
@@ -77,24 +76,24 @@ contract GitHubContributionNFT is ERC721, ChainlinkClient, ConfirmedOwner {
         string memory requestUrl = string(
             abi.encodePacked(
                 "https://nszknao-dapps.vercel.app/api/github-contributions?username=",
-                _usernamesById[tokenId]
+                _usernamesById[tokenId],
+                "&tokenId=",
+                tokenId.toString()
             )
         );
         req.add("get", requestUrl);
-        req.add("path_username", "username");
-        req.add("path_image", "image");
+        req.add("pathImage", "image");
+        req.add("get", requestUrl);
+        req.add("pathTokenId", "tokenId");
 
         return sendChainlinkRequest(req, fee);
     }
 
-    function fulfill(
-        bytes32 requestId,
-        string calldata username,
-        bytes memory image
-    ) public recordChainlinkFulfillment(requestId) {
-        emit RequestFulfilled(requestId, username, image);
-
-        uint256 tokenId = _idByUsername[username];
+    function fulfill(bytes32 requestId, bytes memory image, uint256 tokenId)
+        public
+        recordChainlinkFulfillment(requestId)
+    {
+        emit RequestFulfilled(requestId, tokenId, image);
         imagesById[tokenId] = image;
     }
 

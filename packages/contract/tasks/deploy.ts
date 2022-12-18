@@ -9,17 +9,17 @@ task("deploy", "Deploy").setAction(async (args, { ethers }) => {
   >;
   const contracts: Record<ContractName, ContractDeployment> = {
     MultiPartRLEToSVG: {},
+    NFTDescriptor: {},
     GitHubContributionDescriptor: {
       libraries: () => ({
-        MultiPartRLEToSVG: deployment.MultiPartRLEToSVG.address,
+        NFTDescriptor: deployment.NFTDescriptor.address,
       }),
     },
     GitHubContributionNFT: {
       args: [
         "0x326C977E6efc84E512bB9C30f76E30c160eD06FB",
         "0xCC79157eb46F5624204f47AB42b3906cAA40eaB7",
-        "7da2702f37fd48e5b1b9a5715e3509b6",
-        0.1,
+        "0x53f9755920cd451a8fe46f508746839500000000000000000000000000000000",
         () => deployment.GitHubContributionDescriptor.address,
       ],
     },
@@ -97,4 +97,6 @@ task("deploy", "Deploy").setAction(async (args, { ethers }) => {
 
     console.log(`${name} contract deployed to ${deployedContract.address}`);
   }
+
+  return deployment;
 });
