@@ -11,6 +11,7 @@ gql`
               color
               contributionCount
               weekday
+              contributionLevel
             }
           }
         }

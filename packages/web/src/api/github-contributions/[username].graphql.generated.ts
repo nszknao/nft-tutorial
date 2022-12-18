@@ -8,7 +8,7 @@ export type GitHubContributionsQueryVariables = Types.Exact<{
 }>;
 
 
-export type GitHubContributionsQuery = { __typename?: 'Query', user?: { __typename?: 'User', contributionsCollection: { __typename?: 'ContributionsCollection', contributionCalendar: { __typename?: 'ContributionCalendar', totalContributions: number, weeks: Array<{ __typename?: 'ContributionCalendarWeek', contributionDays: Array<{ __typename?: 'ContributionCalendarDay', color: string, contributionCount: number, weekday: number }> }> } } } | null };
+export type GitHubContributionsQuery = { __typename?: 'Query', user?: { __typename?: 'User', contributionsCollection: { __typename?: 'ContributionsCollection', contributionCalendar: { __typename?: 'ContributionCalendar', totalContributions: number, weeks: Array<{ __typename?: 'ContributionCalendarWeek', contributionDays: Array<{ __typename?: 'ContributionCalendarDay', color: string, contributionCount: number, weekday: number, contributionLevel: Types.ContributionLevel }> }> } } } | null };
 
 
 export const GitHubContributionsDocument = gql`
@@ -22,6 +22,7 @@ export const GitHubContributionsDocument = gql`
             color
             contributionCount
             weekday
+            contributionLevel
           }
         }
       }
