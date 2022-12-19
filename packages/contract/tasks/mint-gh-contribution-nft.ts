@@ -12,5 +12,8 @@ task("mint-gh-contribution-nft", "", async (_, { ethers }) => {
   const uri = await nft.tokenURI(0);
   console.log(uri);
 
+  // const tx = await nft.commitGitHub(0);
+  // await tx.wait();
+
   console.log(`minted`);
 });

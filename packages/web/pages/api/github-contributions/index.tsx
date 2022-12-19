@@ -67,7 +67,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
 
   const abiCoder = new ethers.utils.AbiCoder();
 
-  let ret: Uint8Array = new Uint8Array([0, 23, 53, 30, 0]);
+  const themeIndex = Math.floor(Math.random() * 5);
+
+  let ret: Uint8Array = new Uint8Array([themeIndex, 23, 53, 30, 0]);
 
   const weekNum =
     user.contributionsCollection.contributionCalendar.weeks.length;
