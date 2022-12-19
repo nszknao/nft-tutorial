@@ -41,7 +41,7 @@ const rle = (u8Array: Uint8Array) => {
   return new Uint8Array(result);
 };
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { username, tokenId } = req.query;
+  const { username } = req.query;
 
   if (!username) {
     return new Response(`Invalid Parameter`, { status: 400 });
@@ -94,8 +94,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     ret = new Uint8Array([...ret, ...rle(byteData)]);
   }
   return res.status(200).send({
-    image: abiCoder.encode(["bytes"], [ethers.utils.hexlify(ret)]),
-    tokenId,
+    data: abiCoder.encode(["bytes"], [ethers.utils.hexlify(ret)]),
   });
 };
 

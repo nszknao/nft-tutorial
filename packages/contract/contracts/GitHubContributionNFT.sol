@@ -17,15 +17,11 @@ contract GitHubContributionNFT is ERC721, ChainlinkClient, ConfirmedOwner {
     bytes32 public jobId;
     uint256 private fee;
 
-    mapping(string => uint256) private _idByUsername;
     mapping(uint256 => string) private _usernamesById;
+    mapping(bytes32 => uint256) private _tokenIdByRequestId;
     mapping(uint256 => bytes) public imagesById;
 
-    event RequestFulfilled(
-        bytes32 indexed requestId,
-        uint256 tokenId,
-        bytes data
-    );
+    event RequestFulfilled(bytes32 indexed requestId, bytes data);
 
     constructor(
         address _link,
@@ -45,7 +41,7 @@ contract GitHubContributionNFT is ERC721, ChainlinkClient, ConfirmedOwner {
         uint256 newId = currentTokenId;
         _safeMint(msg.sender, newId);
 
-        _idByUsername[username] = newId;
+        _usernamesById[newId] = username;
         commitGitHub(newId);
 
         currentTokenId++;
@@ -76,24 +72,23 @@ contract GitHubContributionNFT is ERC721, ChainlinkClient, ConfirmedOwner {
         string memory requestUrl = string(
             abi.encodePacked(
                 "https://nszknao-dapps.vercel.app/api/github-contributions?username=",
-                _usernamesById[tokenId],
-                "&tokenId=",
-                tokenId.toString()
+                _usernamesById[tokenId]
             )
         );
         req.add("get", requestUrl);
-        req.add("pathImage", "image");
-        req.add("get", requestUrl);
-        req.add("pathTokenId", "tokenId");
+        req.add("path", "data");
 
-        return sendChainlinkRequest(req, fee);
+        bytes32 _requestId = sendChainlinkRequest(req, fee);
+        _tokenIdByRequestId[_requestId] = tokenId;
+        return _requestId;
     }
 
-    function fulfill(bytes32 requestId, bytes memory image, uint256 tokenId)
+    function fulfill(bytes32 requestId, bytes memory image)
         public
         recordChainlinkFulfillment(requestId)
     {
-        emit RequestFulfilled(requestId, tokenId, image);
+        emit RequestFulfilled(requestId, image);
+        uint256 tokenId = _tokenIdByRequestId[requestId];
         imagesById[tokenId] = image;
     }
 
