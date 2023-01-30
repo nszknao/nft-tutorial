@@ -13,7 +13,7 @@
     "@rainbow-me/rainbowkit": "0.8.1",
     "@vercel/og": "0.0.21",
     "ethers": "5.7.2",
-    "framer-motion": "7.10.2",
+    "framer-motion": "8.5.5",
     "graphql": "16.6.0",
     "next": "13.0.7",
     "next-transpile-modules": "10.0.0",
